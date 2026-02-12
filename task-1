@@ -1,0 +1,79 @@
+This calculator program is a command-line application that allows the user to perform basic arithmetic operations such as addition, subtraction, multiplication, and division. It first defines separate functions for 
+each operation to keep the code organized and modular. Inside the main() function, it runs in a continuous loop, displaying a menu and asking the user to choose an operation. Based on the user’s choice, it takes two
+numeric inputs, converts them into floating-point numbers, and calls the corresponding function to compute the result.
+I have used these in the code:
+>Functions (Modular approach)
+>LOOPS(while,if-elif)
+>User input
+>Exception Handling
+
+CODE:
+# calculator.py
+
+# Function for Addition
+def add(a, b):
+    return a + b
+
+# Function for Subtraction
+def subtract(a, b):
+    return a - b
+
+# Function for Multiplication
+def multiply(a, b):
+    return a * b
+
+# Function for Division
+def divide(a, b):
+    if b == 0:
+        return "Error! Division by zero is not allowed."
+    return a / b
+
+
+def main():
+    while True:
+        print("\n===== Simple CLI Calculator =====")
+        print("1. Addition (+)")
+        print("2. Subtraction (-)")
+        print("3. Multiplication (*)")
+        print("4. Division (/)")
+        print("5. Exit")
+
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == '5':
+            print("Exiting calculator. Goodbye!")
+            break
+
+        if choice in ['1', '2', '3', '4']:
+            try:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+
+                if choice == '1':
+                    print("Result:", add(num1, num2))
+                elif choice == '2':
+                    print("Result:", subtract(num1, num2))
+                elif choice == '3':
+                    print("Result:", multiply(num1, num2))
+                elif choice == '4':
+                    print("Result:", divide(num1, num2))
+
+            except ValueError:
+                print("Invalid input! Please enter numeric values.")
+        else:
+            print("Invalid choice! Please select between 1 and 5.")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
