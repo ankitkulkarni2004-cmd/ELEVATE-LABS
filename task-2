@@ -1,0 +1,85 @@
+This To-Do List application is a simple console-based Python program that allows users to manage their daily tasks interactively through a menu-driven interface. The program continuously displays options such as adding
+a new task, viewing all tasks, marking a task as completed, deleting a task, or exiting the application. Tasks are stored in a list as dictionaries, where each task contains a description and a completion status 
+(True or False). When a user selects an option, the corresponding function is executed—for example, adding a task appends a new dictionary to the list, marking a task updates its completion status, and deleting a task 
+removes it from the list. The program runs inside a loop so the user can perform multiple operations until they choose to exit
+
+CODE:
+# todo.py
+# Console-based To-Do List Application
+
+def show_menu():
+    print("\n===== TO-DO LIST MENU =====")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Mark Task as Completed")
+    print("4. Delete Task")
+    print("5. Exit")
+
+
+def add_task(tasks):
+    task = input("Enter task description: ")
+    tasks.append({"task": task, "completed": False})
+    print("Task added successfully!")
+
+
+def view_tasks(tasks):
+    if not tasks:
+        print("No tasks available.")
+        return
+
+    print("\nYour Tasks:")
+    for index, task in enumerate(tasks):
+        status = "✔ Completed" if task["completed"] else "✘ Not Completed"
+        print(f"{index + 1}. {task['task']} [{status}]")
+
+
+def mark_completed(tasks):
+    view_tasks(tasks)
+    try:
+        task_number = int(input("Enter task number to mark as completed: "))
+        if 1 <= task_number <= len(tasks):
+            tasks[task_number - 1]["completed"] = True
+            print("Task marked as completed!")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+
+def delete_task(tasks):
+    view_tasks(tasks)
+    try:
+        task_number = int(input("Enter task number to delete: "))
+        if 1 <= task_number <= len(tasks):
+            removed = tasks.pop(task_number - 1)
+            print(f"Deleted task: {removed['task']}")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+
+def main():
+    tasks = []
+
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            view_tasks(tasks)
+        elif choice == "3":
+            mark_completed(tasks)
+        elif choice == "4":
+            delete_task(tasks)
+        elif choice == "5":
+            print("Exiting To-Do List. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
